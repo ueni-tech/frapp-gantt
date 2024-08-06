@@ -9,6 +9,7 @@ var tasks = [
         end: '2023-01-05',
         // progress: 20,
         user: '西',
+        user_id: 1,
         custom_class: 'user1-task' // ユーザー固有のクラス
     },
     {
@@ -18,6 +19,7 @@ var tasks = [
         end: '2023-01-05',
         // progress: 20,
         user: '相川',
+        user_id: 2,
         custom_class: 'user2-task' // 別のユーザー用のクラス
     },
     {
@@ -27,6 +29,17 @@ var tasks = [
         end: '2023-01-05',
         // progress: 20,
         user: '相川',
+        user_id: 2,
+        custom_class: 'user2-task' // 別のユーザー用のクラス
+    },
+    {
+        id: 'Task 4',
+        name: 'タスク4',
+        start: '2023-01-01',
+        end: '2023-01-05',
+        // progress: 20,
+        user: '松本',
+        user_id: 39,
         custom_class: 'user2-task' // 別のユーザー用のクラス
     },
     // 他のタスク...
@@ -76,9 +89,20 @@ function generateTaskList() {
 generateTaskList();
 
 // ユーザーごとに色を割り当てる関数
-function assignColorToUser(user) {
-    const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#FFD700', '#8A2BE2', '#00FF7F', '#FF4500', '#1E90FF', '#32CD32', '#FF1493', '#8B4513']; // 色のリスト
-    const index = user.charCodeAt(0) % colors.length; // ユーザー名の最初の文字に基づいて色を選択
+function assignColorToUser(user_id) {
+    const colors = [
+        '#7F7F7F', '#7F7F00', '#7F007F', '#007F7F', '#7F3F3F',
+        '#3F7F3F', '#3F3F7F', '#7F5F00', '#007F5F', '#5F007F',
+        '#7F007F', '#007F7F', '#7F7F3F', '#3F7F7F', '#7F3F7F',
+        '#7F7F5F', '#5F7F7F', '#7F5F7F', '#7F7F7F', '#7F7F00',
+        '#7F007F', '#007F7F', '#7F3F3F', '#3F7F3F', '#3F3F7F',
+        '#7F5F00', '#007F5F', '#5F007F', '#7F007F', '#007F7F',
+        '#7F7F3F', '#3F7F7F', '#7F3F7F', '#7F7F5F', '#5F7F7F',
+        '#7F5F7F', '#7F7F7F', '#7F7F00', '#7F007F', '#007F7F',
+        '#7F3F3F', '#3F7F3F', '#3F3F7F', '#7F5F00', '#007F5F',
+        '#5F007F', '#7F007F', '#007F7F', '#7F7F3F', '#3F7F7F'
+    ];
+    const index = user_id % colors.length; // user_idに基づいて色を選択
     return colors[index];
 }
 
@@ -89,7 +113,7 @@ tasks.forEach(task => {
 
 // CSSルールを動的に追加
 tasks.forEach(task => {
-    const color = assignColorToUser(task.user);
+    const color = assignColorToUser(task.user_id);
     const style = document.createElement('style');
     style.textContent = `.${task.custom_class} .bar { fill: ${color} !important; }`;
     document.head.appendChild(style);
