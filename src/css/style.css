@@ -6,33 +6,23 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-}
+} */
 
 #gantt {
   width: 90%;
   height: 500px;
-} */
+}
 
 #gantt-container {
   display: flex;
 }
 
-#task-list {
-  width: 200px; /* 必要に応じて調整 */
+/* #task-list {
+  width: 200px;
   border-right: 1px solid #ddd;
   flex-shrink: 0;
-}
+} */
 
-#gantt {
-  flex-grow: 1;
+.gantt .today-highlight {
+  fill: #f9546b !important;
 }
-
-.user1-task .bar {
-  fill: #FF6B6B !important;
-}
-
-.user2-task .bar {
-  fill: #4ECDC4 !important;
-}
-
-/* 必要に応じて他のユーザー用の色を追加 */

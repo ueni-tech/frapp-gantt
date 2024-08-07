@@ -5,8 +5,8 @@ var tasks = [
     {
         id: 'Task 1',
         name: 'タスク1',
-        start: '2023-01-01',
-        end: '2023-01-05',
+        start: '2024-08-01',
+        end: '2024-08-05',
         // progress: 20,
         user: '西',
         user_id: 1,
@@ -15,8 +15,8 @@ var tasks = [
     {
         id: 'Task 2',
         name: 'タスク2',
-        start: '2023-01-01',
-        end: '2023-01-05',
+        start: '2024-08-01',
+        end: '2024-08-05',
         // progress: 20,
         user: '相川',
         user_id: 2,
@@ -25,8 +25,8 @@ var tasks = [
     {
         id: 'Task 3',
         name: 'タスク3',
-        start: '2023-01-01',
-        end: '2023-01-05',
+        start: '2024-08-01',
+        end: '2024-08-05',
         // progress: 20,
         user: '相川',
         user_id: 2,
@@ -35,8 +35,8 @@ var tasks = [
     {
         id: 'Task 4',
         name: 'タスク4',
-        start: '2023-01-01',
-        end: '2023-01-05',
+        start: '2024-08-01',
+        end: '2024-08-05',
         // progress: 20,
         user: '松本',
         user_id: 39,
@@ -45,7 +45,9 @@ var tasks = [
     // 他のタスク...
 ];
 
-var gantt = new Gantt("#gantt", tasks);
+// var gantt = new Gantt("#gantt", tasks, {
+//   view_mode: "Day",
+// });
 
 // タスクをユーザーごとにグループ化する関数
 function groupTasksByUser(tasks) {
@@ -119,5 +121,23 @@ tasks.forEach(task => {
     document.head.appendChild(style);
 });
 
+
 // Ganttチャートの初期化
 var gantt = new Gantt("#gantt", tasks);
+
+function scroll_today() {
+  if (!gantt.options.focus) {
+    const oldest = gantt.get_oldest_starting_date().getTime();
+    const t = new Date() - oldest;
+    const newDate = new Date(gantt.gantt_start.getTime() - t);
+    gantt.options.focus = newDate;
+    gantt.gantt_start = newDate;
+    gantt.set_scroll_position()
+  } else {
+    gantt.gantt_start = gantt.options.focus;
+    gantt.set_scroll_position()
+  }
+
+}
+
+scroll_today()
